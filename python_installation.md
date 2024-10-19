@@ -4,7 +4,8 @@
 Homebrew is a package manager for macOS that simplifies installing and managing software packages directly from the command line.
 
 1. Open Terminal on MacOS
-2. Run the following command to install Homebrew: 
+2. Run the following command to install Homebrew:
+   
    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 
