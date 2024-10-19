@@ -40,7 +40,7 @@ To be able to run the code I had to create a virtual environment using Python 3.
 
      pip install tensorflow-macos
 
-   - Note: It was necessary to ensure the virtual environment was using Python 3.10 to avoid compatibility issues.
+It was necessary to ensure the virtual environment was using Python 3.10 to avoid compatibility issues.
 
 5. Running the code:
    - Ran the code using the command:
