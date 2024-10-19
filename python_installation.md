@@ -12,8 +12,10 @@ I found the code snippet for installing Homebrew on the official Homebrew websit
 
 # Step 2: Install Python
 To install the latest version of Python we need to run this command in the Terminal: brew install python
+
 Homebrew will download and install Python with any necessary dependencies.
 
 # Step 3: Verify the installation
 Verify that Python has been succesfully installed by running this command: python3 --version
+
 The output we see is: Python 3.13.0
