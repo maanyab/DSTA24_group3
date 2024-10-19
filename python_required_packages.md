@@ -10,9 +10,9 @@ After some research, I found out that this error indicates that my current Pytho
 # Solution 1
 The problem can be overcome by creating a virtual environment that will allow us to install packages in an isolated environment without interfering with the Homebrew-managed Python.
 
-Create a virtual environment by running this code: python3 -m venv myenv
-Activate the virtual environment: source myenv/bin/activate
-Install the packages using pip: pip install tensorflow numpy matplotlib
+- Create a virtual environment by running this code: python3 -m venv myenv
+- Activate the virtual environment: source myenv/bin/activate
+- Install the packages using pip: pip install tensorflow numpy matplotlib
 
 # Problem 2
 When I tried to install the packages i got this output: 
@@ -24,10 +24,10 @@ When I tried to install the packages i got this output:
 # Solution 2
 To solve this problem we can create a virtual environment using a compatible Python version.
 
-Install Python 3.10 using Homebrew: brew install python@3.10
-Create a virtual environment using Python 3.10: python3.10 -m venv myenv
-Activate the virtual environment: source myenv/bin/activate
-Install the packages: pip install tensorflow numpy matplotlib
+- Install Python 3.10 using Homebrew: brew install python@3.10
+- Create a virtual environment using Python 3.10: python3.10 -m venv myenv
+- Activate the virtual environment: source myenv/bin/activate
+- Install the packages: pip install tensorflow numpy matplotlib
 
 Now we have installed:
 - Tensorflow: the core library for running our CNN
