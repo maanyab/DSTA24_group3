@@ -22,19 +22,30 @@ Since the project required only the one python code file, the raw file was direc
 
 
 ## Task 3
-The initial error when trying to commit was to not have declared useremail and username. The following commands were used to do so:       git config --global user.email "you@example.com"
-  git config --global user.name "Your Name".
+The initial error when trying to commit was to not have declared useremail and username. The following commands were used to do so:       
+        git config --global user.email "you@example.com"
+        git config --global user.name "Your Name".
 
 Another error was not being in the right directory when trying to commit. After correcting this issue, the file was added using the following commit and push commands:
-    git add code/
-    git commit -m "Existing code upload"
-    git push
+        git add code/
+        git commit -m "Existing code upload"
+        git push
 
+## Task 4
+Ubuntu comes with Python preinstalled.
+Initially it was wrongly assumed that there was no python installed as the following command resulted in an error:
+        python --version
+But it was later realised that the correct command was the following and that python does exist:
+        python3 --version
 
-Using python 3.12.4 from anaconda
-- New environment to isolate dependecies for this project conda create --name DSTA1_env python=3.12.4
-- To activate: conda activate DSTA1_env
+Python 3.12.4 which was installed as part of anaconda was used for this project
+A new conda environment was created to isolate dependecies for this project using the following command
+        conda create --name DSTA1_env python=3.12.4
+        conda activate DSTA1_env
+The conda environment was used instead of venv, to increase familiarity as future use cases are expected to go beyond using python packages to more data science - non python dependencies.
 
-Initially I wrongly assumed that there was no python installed as python --version gave an error, but later realised that it does exist when python3 --version. But the coda environment was still used instead of venv, to increase familiarity as future use cases will probably go beyond only using python packages to more data science - non python dependencies.
+The necessary libraries required to run the code were installed using the following command:
+        conda install numpy keras 
 
-Install libraries using conda install ....
+Running the code resulted in an error which arose from not having tensflow, which was rectified using:
+        conda install tensorflow
