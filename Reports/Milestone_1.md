@@ -4,23 +4,21 @@
 ## Initial Setup
 To begin with, I cloned the GitHub repository to my local repository by clicking the clone repository button on visual studio code. A prompt asking for the repository URL appeared, I pasted the URL found in HTTPS section after which the repository was cloned.
 
-## Task 1
+## Task 1: Overview of MNIST Datset
 
-### Steps 
-
-### About the dataset
+### Overview 
 
 - MNIST dataset is a database of handwritten digits. A handwritten digits database is a structured collection of images or samples of handwritten numerical digits (0-9). The purpose of such datasets is benchmarking, training machine learning datasets and for research and development.
 
 - This particular dataset tests a lot of classification techniques including linear classifiers, K-Nearest Neighbours, Boosted Stumps, Non-linear Classifiers, SVM, Neural Nets, Convolutional Nets.
 
 
-## Task 2
+## Task 2: Code Base from Keras Repository
 
 I tried to pull the base code using shell commands. This process took a bit more research. I found a couple of sources that provided the information required to carry this step out. Firstly, I tried with the code below -
 
 ```
- git remote add keras-team/keras-io https://github.com/keras-team/keras-io.git
+git remote add keras-team/keras-io https://github.com/keras-team/keras-io.git
 git fetch keras-team/keras-io
 git checkout -b base-code keras-team/keras-io/examples/vision/mnist_convnet.py  
 ```
@@ -28,13 +26,13 @@ I got an error with this code as this code is used to create a branch from an ex
 
 ```
 git remote add keras-io https://github.com/keras-team/keras-io.git
-git sparse-checkout init --cone
+git sparse-checkout init --cone #To pull a subset of files from a large repository
 git sparse-checkout set examples/vision/mnist_convnet.py
 git pull keras-io master
 git checkout keras-io/master -- examples/vision/mnist_convnet.py
 ```
 
-## Task 3: Commiting the relevant python file to Git repo
+## Task 3: Commiting the Relevant Python File to Git Repository
 
 To ensure organisation and structure, I made two separate folders (for code and reports) simply using the options available on the left pane of the visual studio code(i.e. I did not use shell command initially).However, I encountered an error while trying to commit. Thereafter, I used the add command in the shell to add the report folder and the files in it. Lastly, I also changed the branch from main to the branch assigned to me.There were some authentication issues while pushing the changes as I had 2FA enabled. I had used HTTPS to clone the repository, therefore I had to generate personal access code token. After entering the generated code, I was able to push the changes I made to Git.
 
@@ -48,30 +46,74 @@ I had a preexisting folder for codes that I deleted and renamed the folder examp
 mv examples/vision Code
 ```
 However, I was again confronted with an error as I was working with paths not included in my sparse checkout. Thus, was unable to commit the changes. As the sparse only recognised the old folder name. I added the new folder name (Code) to it.
-
 ```
 git sparse-checkout set Code/
 ```
 
+## Task 4: Running the MNIST CNN Code in Python
 
-## Task 4
-I had visual studio code already installed on my laptop therefore, I didn't have to install Python. However, I did have to install the libraries used in the code including Numpy and Keras using the 'pip install' command. Prior to installation, I activated my virtual environment which ran the  3.11.7 version of Python. 
-In the first instance the  script wouldn't run bcz the packages weren't installed properly. There was a requirement to install TensorFlow along with Keras
+- I had visual studio code already installed on my laptop therefore, I didn't have to install Python.
+I had already pulled the base code from git as mentioned before. However, I did have to install the libraries used in the code including Numpy and Keras using the 'pip install' command. 
+- In the first instance the script wouldn't run as the packages weren't installed properly. There was a requirement to install TensorFlow as it is a dependency for Keras. I tried to install all the dependencies for this code base using the requirements.txt file, however, I received an error stating there was no such file or directory. The reason being that the file was not pulled from the remote directory. After pulling the file, I installed all the dependencies from the requirements file. Thereafter, after I ran "pip freeze" to check the dependencies and their versions which I saved in the requirements file in the root directory.
+- I activated my virtual environment using the command below and named it virenv. It ran the  3.11.7 version of Python. The entire virtual environment does not need to be tracked thus I put it in git ignore file. 
+```
+python -m venv virenv
+```
+MacOS - The mnist_convnet code ran smoothly on Mac, no dependency issues were encountered.
 
+## Task 5: Explanation of the MNIST CNN Code.
+The code implements a convolutional neural network (CNN) using Keras and TensorFlow to classify handwritten digits from the MNIST dataset. A convolutional Neural network is a regularised type of feed forward neural network that learns features by itself. These type of neural network are preferred as they perform better with images, speech and audio signal input.The model at hand is trained to learn patterns in the images of digits and evaluate its performance on a test set.
 
+```bash
+python ../Code/minist_convnet.py    #The command to run the code file.
+```
+### Input and Output 
 
+**Input**: The input to the neural network is a structural collection of grayscale images from the MNIST dataset, each of size 28x28 pixels. The images represent handwritten numerical digits ranging from 0 to 9. The dataset contains 60,000 training samples and 10,000 test samples of handwritten digits (0-9).
 
-## Task 5
+**Output**: The output is a probability distribution over 10 classes (digits 0-9), indicating the likelihood that the input image belongs to each class. The model used is sequential model as it is appropriate for plain stacking of layers. Since there are only single inputs and outputs in the model as well as layers sequential model can be used. The summary of the sequential model displayed different layer types and their respective output shape as well as parameter count. There are 7 layer types namely Conv2D, MaxPooling2D, Conv2D, MaxPooling2D_1, Flatten, Dropout, Dense. The model's predictions are typically evaluated using accuracy(0.02450996) and loss(0.9912299)metrics. There were 15 Epochs.
 
-Keras and Tensorflow - Tensorflow library is a dependency of Keras. Keras relies on Tensorflow as a backend
--The model it used was sequential 
-- The dataset set was automatoicall downloaded and split using the code
+### Keras & TensorFlow
+
+**Keras** is a high-level API of Tensorflow platform developed by Google and written in Python. It is modular and extensible, making it easy to build and train deep learning models. Keras acts as an interface for TensorFlow, allowing users to define and train neural networks more intuitively. Keras also allows full access to scalability and cross-platform capabilities of TensorFlow. The core data structure of Keras are layers and models.
+
+**Tensorflow** library is a dependency of Keras as the latter is integrated into TensorFlow as tf.keras. Tensorflow is open source machine learning library devloped by google. Keras relies on Tensorflow as a backend. TensorFlow is an end-to-end platform for machine learning. It supports the following - numeric computation, GPU and distributed processing, Automatic differentiation, Model construction, training, and export. It operates on multidimentional arrays known as tensors
+
+### Data Loading and Dependencies 
+The MNIST dataset is **loaded** using Keras's built-in function 
 ```
     keras.datasets.mnist.load_data()
 ```
-- There were 15 Epoch
+This function downloads the dataset if it is not already available locally, splits it into training and testing sets, and normalizes the pixel values to be between 0 and 1 for better training performance.
+
+The following **dependencies** are imported in the code:
+
+- **TensorFlow**: the core library used to build and train the neural network model.
+- **Keras modules**: these are used to construct the architecture of the CNN, defining layers such as convolutional, pooling, and dense (fully connected) layers.
+- **NumPy**: a library for numerical operations, used for handling arrays and matrices in the data processing pipeline.
+
+### Neural Network 
+
+#### Architecture 
+The architecture is typically a Convolutional Neural Network (CNN), which is particularly well-suited for image data. As mentioned above there were 7 layers in this model namely -
+- **Convolutional layers (Conv2D)** - It is used for feature extraction. These layers extract features from the input images by applying filters to detect patterns such as edges and textures. Two Convolutional layers are used.
+- **Pooling layers (MaxPooling2D)** - Used to downsample feature maps. These layers reduce the spatial dimensions of feature maps while retaining important information, which helps reduce computational complexity. Two Max Pooling 2D layers are used.
+- **Flatten Layer** - Flatten layer is used to make the multidimensional input one-dimensional, commonly used in the transition from the convolution layer to the full connected layer. In other words, this layer converts the 2D feature maps into a 1D vector, preparing the data for the dense layer.
+- **Dropout Layer** - Dropout is a powerful technique utilized in training Neural Networks to minimize the occurrence of overfitting. Primarily, it serves as a form of regularization, wherein during the training phase, certain neurons are randomly 'dropped out'. This process allows the model to generalize better and improve accuracy on unseen data.
+- **Dense Layer**  -  The final layer of the model that outputs the probabilities for each class (digit 0-9). The primary advantage of dense layers is that they are able to capture complex patterns in data by allowing each neuron to interact with all the neurons in the previous layer. This makes dense layers well-suited for tasks such as image classification.
+
+#### Reason to Employ Neural Network
+A neural network is appropriate for this task due to the below mentioned reasons - 
+
+**Complexity** - Handwritten digit classification is a complex pattern recognition problem that requires the ability to learn hierarchical features from the input images.
+
+**Scalability** - CNNs are particularly effective for image processing tasks due to their ability to capture spatial relationships and patterns, making them suitable for recognizing digits in varying orientations and styles.
+
+**Ability to learn** - Traditional machine learning methods may not perform as well on this type of problem, as they often rely on handcrafted features, while CNNs learn features automatically during training.
 
 ## Task 6 
+Before beginning the project we made the gitignore as well as the ReadMe documentation and stored it in the Root Directory.
+After completion of majority of our task, we updated the ReadMe file.
 
 
 
