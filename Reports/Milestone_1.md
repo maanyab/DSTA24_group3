@@ -229,7 +229,7 @@ A neural network is appropriate for this task due to the below mentioned reasons
 
 ## Task 6 : Adding the Documentation file
 Before beginning the project we made the gitignore as well as the ReadMe documentation and stored it in the Root Directory.
-After completion of majority of our task, we updated the ReadMe file.
+After completion of majority of our tasks and merging the branches to the main, we updated the ReadMe file.
 
 
 ## Alternative Method
