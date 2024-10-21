@@ -1,5 +1,11 @@
 # Milestone 1 Report 
 
+*DSTA24 Fall Term 2024 - Group 3*
+
+__*Authors*__
+- *Vishal Alluri* 
+- *Maanya Bagga*
+- *Tommaso Fruci*
 
 ## Initial Setup
 To begin with, I cloned the GitHub repository to my local repository by clicking the clone repository button on visual studio code. A prompt asking for the repository URL appeared, I pasted the URL found in HTTPS section after which the repository was cloned.
