@@ -21,18 +21,15 @@ git clone https://github.com/maanyab/DSTA24_group3.git
 cd your-repository
 
 #Create and activate the virtual environment
-```
+
 python -m venv myvenv  #Make sure the virtual environment is running Python 3.11
 source venv/bin/activate
-```
 
-# Install dependencies (if applicable)
+#Install dependencies (if applicable)
 pip install -r requirements.txt  # If running the code using 1st method 
     install     environnent.yml    # If running the code using alternative method
 
-#Use this command to run the python file
-
-```
+# Use this command to run the python file
 python ../Code/minist_convnet.py
 ```
 
