@@ -78,7 +78,7 @@ git sparse-checkout set Code/
 
 ## Task 4: Running the MNIST CNN Code in Python
 
-- I had visual studio code already installed on my laptop therefore, I didn't have to install Python.
+- I used visual studio code to run Python both of which were already installed on my laptop therefore, I didn't have to install Python again.
 I had already pulled the base code from git as mentioned before. However, I did have to install the libraries used in the code including Numpy and Keras using the 'pip install' command. 
 - In the first instance the script wouldn't run as the packages weren't installed properly. There was a requirement to install TensorFlow as it is a dependency for Keras. I tried to install all the dependencies for this code base using the requirements.txt file, however, I received an error stating there was no such file or directory. The reason being that the file was not pulled from the remote directory. After pulling the file, I installed all the dependencies from the requirements file. Thereafter, after I ran "pip freeze" to check the dependencies and their versions which I saved in the requirements file in the root directory.
 - I activated my virtual environment using the command below and named it virenv. It ran the  3.11.7 version of Python. The entire virtual environment does not need to be tracked thus I put it in git ignore file. 
@@ -193,13 +193,13 @@ python ../Code/minist_convnet.py    #The command to run the code file.
 
 **Input**: The input to the neural network is a structural collection of grayscale images from the MNIST dataset, each of size 28x28 pixels. The images represent handwritten numerical digits ranging from 0 to 9. The dataset contains 60,000 training samples and 10,000 test samples of handwritten digits (0-9).
 
-**Output**: The output is a probability distribution over 10 classes (digits 0-9), indicating the likelihood that the input image belongs to each class. The model used is sequential model as it is appropriate for plain stacking of layers. Since there are only single inputs and outputs in the model as well as layers sequential model can be used. The summary of the sequential model displayed different layer types and their respective output shape as well as parameter count. There are 7 layer types namely Conv2D, MaxPooling2D, Conv2D, MaxPooling2D_1, Flatten, Dropout, Dense. The model's predictions are typically evaluated using accuracy(0.02450996) and loss(0.9912299)metrics. There were 15 Epochs.
+**Output**: The output is a probability distribution over 10 classes (digits 0-9), indicating the likelihood that the input image belongs to each class. The model used is sequential model as it is appropriate for plain stacking of layers. The output summary of the sequential model displayed different layer types and their respective output shape as well as parameter count. There are 7 layer types namely Conv2D, MaxPooling2D, Conv2D, MaxPooling2D_1, Flatten, Dropout, Dense. The model's predictions are typically evaluated using accuracy(0.02450996) and loss(0.9912299)metrics. There were 15 Epochs (one epoch refers to one entire passing of training data through the algorithm).
 
 ### Keras & TensorFlow
 
 **Keras** is a high-level API of Tensorflow platform developed by Google and written in Python. It is modular and extensible, making it easy to build and train deep learning models. Keras acts as an interface for TensorFlow, allowing users to define and train neural networks more intuitively. Keras also allows full access to scalability and cross-platform capabilities of TensorFlow. The core data structure of Keras are layers and models.
 
-**Tensorflow** library is a dependency of Keras as the latter is integrated into TensorFlow as tf.keras. Tensorflow is open source machine learning library devloped by google. Keras relies on Tensorflow as a backend. TensorFlow is an end-to-end platform for machine learning. It supports the following - numeric computation, GPU and distributed processing, Automatic differentiation, Model construction, training, and export. It operates on multidimentional arrays known as tensors
+**Tensorflow** library is a dependency of Keras as the latter is integrated into TensorFlow as tf.keras. Tensorflow is open source machine learning library devloped by google. It is an end-to-end platform for machine learning and Keras relies on it as a backend. It supports the following - numeric computation, GPU and distributed processing, Automatic differentiation, Model construction, training, and export. It operates on multidimentional arrays known as tensors.
 
 ### Data Loading and Dependencies 
 The MNIST dataset is **loaded** using Keras's built-in function 
