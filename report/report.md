@@ -22,30 +22,48 @@ Since the project required only the one python code file, the raw file was direc
 
 
 ## Task 3
-The initial error when trying to commit was to not have declared useremail and username. The following commands were used to do so:       
+The initial error when trying to commit was to not have declared useremail and username. The following commands were used to do so:     
+        ```  
         git config --global user.email "you@example.com"
         git config --global user.name "Your Name".
+        ```
 
 Another error was not being in the right directory when trying to commit. After correcting this issue, the file was added using the following commit and push commands:
-        git add code/
+        
+        ```git add code/
         git commit -m "Existing code upload"
         git push
+        ```
+        
 
 ## Task 4
+
 Ubuntu comes with Python preinstalled.
 Initially it was wrongly assumed that there was no python installed as the following command resulted in an error:
-        python --version
+        ```python --version```
 But it was later realised that the correct command was the following and that python does exist:
-        python3 --version
+        ```python3 --version```
 
-Python 3.12.4 which was installed as part of anaconda was used for this project
-A new conda environment was created to isolate dependecies for this project using the following command
+Python 3.12.4 which was installed as part of anaconda 24.9.2 was used for this project
+A new conda environment was created to isolate dependencies for this project using the following command:
+```
         conda create --name DSTA1_env python=3.12.4
         conda activate DSTA1_env
+```
 The conda environment was used instead of venv, to increase familiarity as future use cases are expected to go beyond using python packages to more data science - non python dependencies.
 
-The necessary libraries required to run the code were installed using the following command:
-        conda install numpy keras 
+The necessary libraries (numpy, keras) required to run the code were installed using the following command:
+        ```conda install numpy keras``` 
 
 Running the code resulted in an error which arose from not having tensflow, which was rectified using:
-        conda install tensorflow
+        ```conda install tensorflow```
+
+The following versions of the library were used - numpy version 1.26.4, keras 3.4.1 and tensorlow 2.17.0
+        ```conda list library_name```
+
+To recreate the same environment, an 'environment.yml' file was created which lists all the dependencies and their versions using the following command:
+        ```conda env export --no-builds > environment.yml```
+
+
+## Task 5
+
