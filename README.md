@@ -1,4 +1,5 @@
 # Milestone 1
+DSTA24 Fall Term 2024 - Group 3
 
 ## Description
 This project implements sequential model on the keras' MNIST dataset to classify images of handwritten digits.
