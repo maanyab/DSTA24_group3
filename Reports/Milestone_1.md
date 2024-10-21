@@ -81,12 +81,109 @@ python -m venv virenv
 ```
 MacOS - The mnist_convnet code ran smoothly on Mac, no dependency issues were encountered.
 
+### Alternative Method 
+
+#### Installing Python on MacOS using Homebrew
+Homebrew is a package manager for macOS that simplifies installing and managing software packages directly from the command line.
+
+#### Step 1: Install Homebrew
+- Open Terminal on MacOS
+- Run the following command to install Homebrew:
+```
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+I found the code snippet for installing Homebrew on the official Homebrew website. The command is designed to streamline the installation process of Homebrew. Specifically, the code executes a shell script hosted at
+https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh on GitHub.
+
+#### Step 2: Install Python
+To install the latest version of Python we need to run this command in the Terminal: 
+```
+brew install python
+```
+Homebrew will download and install Python with any necessary dependencies.
+
+#### Step 3: Verify the Installation 
+Verify that Python has been succesfully installed by running this command: python3 --version
+The output is: Python 3.13.0
+
+#### Running the code
+- Setting up the project directory:
+    Created a project directory on my desktop titled "DS Toolkits and Architectures".
+
+#### Problem 
+I tried to run the code in my virtual environment but the virtual environment was using python 3.13 and the error i got was:
+"ERROR: Could not find a version that satisfies the requirement tensorflow (from versions: none) ERROR: No matching distribution found for tensorflow"
+
+#### Solution
+To be able to run the code I had to create a virtual environment using Python 3.10, after having deactivated the old virtual environment.
+
+**Creating a Virtual Environment:** Opened the terminal and navigated to the project directory using:
+```
+cd '/Users/tommaso/Desktop/File/DS Toolkits and Architectures'
+```
+Created a virtual environment named **myenv310** with the following command:
+```
+python3.10 -m venv myenv310
+```
+**Activating the virtual environment:** using
+```
+source myenv310/bin/activate
+```
+**Installing TensorFlow:** Installed TensorFlow in the activated virtual environment using:
+```
+pip install tensorflow-macos
+```
+It was necessary to ensure the virtual environment was using Python 3.10 to avoid compatibility issues.
+
+**Running the code:** Ran the code using the command:
+```
+python mnist_convnet.py
+```
+The code successfully downloaded the MNIST dataset, built the neural network model, trained it, and evaluated its performance.
+The evaluation yielded a **test accuracy** of approximately 99.14% and a test loss of 0.0256.
+
+**Test Loss:** The test loss of 0.0256 indicates that the model made relatively few errors when predicting the test data, suggesting good performance and effective generalization to unseen data.
+
+**Test Accuracy:** The test accuracy of 99.14% signifies that the model correctly classified about 99.14% of the test images, reflecting its effectiveness at recognizing and classifying handwritten digits.
+
+#### Required Packages
+In order to be able to run the Python script that uses libraries such as TensorFlow, NumPy and Matplotlib we need to install these packages using pip.
+```
+pip3 install tensorflow numpy matplotlib
+```
+#### Problem 1 
+When running the code to install the libraries i got this ouput: "error: externally-managed-environment" After some research, I found out that this error indicates that my current Python environment is "externally managed" by Homebrew and it is not recommended to install packages directly using pip3 in this environment.
+
+#### Solution 1
+The problem can be overcome by creating a virtual environment that will allow us to install packages in an isolated environment without interfering with the Homebrew-managed Python.
+
+- Create a virtual environment by running this code: python3 -m venv myenv
+- Activate the virtual environment: source myenv/bin/activate
+- Install the packages using pip: pip install tensorflow numpy matplotlib
+
+#### Problem 2
+When I tried to install the packages i got this output: "ERROR: Could not find a version that satisfies the requirement tensorflow (from versions: none) ERROR: No matching distribution found for tensorflow"
+This means that pip could not find a comaptible version of TensorFlow for my Python version (Python 3.13)
+
+#### Solution 2
+To solve this problem we can create a virtual environment using a compatible Python version.
+- Install Python 3.10 using Homebrew: brew install python@3.10
+- Create a virtual environment using Python 3.10: python3.10 -m venv myenv
+- Activate the virtual environment: source myenv/bin/activate
+- Install the packages: pip install tensorflow numpy matplotlib
+Now we have installed:
+- Tensorflow: the core library for running our CNN
+- NumPy: used for numerical operations and array handling
+- Matplotlib: if we need to visualize data or results
+
 ## Task 5: Explanation of the MNIST CNN Code.
 The code implements a convolutional neural network (CNN) using Keras and TensorFlow to classify handwritten digits from the MNIST dataset. A convolutional Neural network is a regularised type of feed forward neural network that learns features by itself. These type of neural network are preferred as they perform better with images, speech and audio signal input.The model at hand is trained to learn patterns in the images of digits and evaluate its performance on a test set.
 
 ```bash
 python ../Code/minist_convnet.py    #The command to run the code file.
 ```
+
 ### Input and Output 
 
 **Input**: The input to the neural network is a structural collection of grayscale images from the MNIST dataset, each of size 28x28 pixels. The images represent handwritten numerical digits ranging from 0 to 9. The dataset contains 60,000 training samples and 10,000 test samples of handwritten digits (0-9).
@@ -102,7 +199,7 @@ python ../Code/minist_convnet.py    #The command to run the code file.
 ### Data Loading and Dependencies 
 The MNIST dataset is **loaded** using Keras's built-in function 
 ```
-    keras.datasets.mnist.load_data()
+keras.datasets.mnist.load_data()
 ```
 This function downloads the dataset if it is not already available locally, splits it into training and testing sets, and normalizes the pixel values to be between 0 and 1 for better training performance.
 
