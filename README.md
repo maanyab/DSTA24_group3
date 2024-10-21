@@ -35,7 +35,7 @@ source venv/bin/activate
 
 #Install dependencies (if applicable)
 pip install -r requirements.txt  # If running the code using 1st method 
-    install     environnent.yml    # If running the code using alternative method
+conda env create -f environment.yml   # If running the code using alternative method
 
 # Use this command to run the python file
 python ../Code/minist_convnet.py
