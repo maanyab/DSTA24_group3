@@ -93,8 +93,7 @@ Homebrew is a package manager for macOS that simplifies installing and managing 
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-I found the code snippet for installing Homebrew on the official Homebrew website. The command is designed to streamline the installation process of Homebrew. Specifically, the code executes a shell script hosted at
-https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh on GitHub.
+I found the code snippet for installing Homebrew on the official Homebrew website. The command is designed to streamline the installation process of Homebrew. Specifically, the code executes a shell script hosted on this [GitHub page](https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh).
 
 #### Step 2: Install Python
 To install the latest version of Python we need to run this command in the Terminal: 
