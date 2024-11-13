@@ -1,6 +1,42 @@
+# Byte-compiled files
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
-*.npy
-virenv/
+
+# Environments
+.env
+.venv
+env/
+venv/
+
+# Files
+*.npy     # NumPy files
+*.csv     # CSV files
+*.tssv    # Tab-separated files
+*.sqlite3 # SQL files
+
+# System files
+.DS_Store  # for MacOS
+Thumbs.db  # for Windows
+
+# Logs and debug files
+*.log
+logs/
+debug/
+
+# Media files
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmp
+*.tiff
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.mp3
+*.wav
+
+
