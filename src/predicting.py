@@ -11,7 +11,7 @@ def make_prediction(model, x_test):
     Makes predictions using the fitted model on the test data.
 
     Args:
-        model: The trained Keras model.
+        model: The trained model.
         x_test: The test data
 
     Returns:
@@ -24,7 +24,7 @@ def make_prediction(model, x_test):
 
 def compare_predictions(model1, model2, x_test):
     """
-    Compares predictions made by the saved models and original on the same test data.
+    Compares predictions made by the saved model and original on the same test data.
 
     Args:
         model1: The first model to compare.

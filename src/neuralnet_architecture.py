@@ -10,8 +10,8 @@ def neuralnet_model(input_shape, num_classes):
     """
     Create a Convolutional Neural Network (CNN) model.
 
-        input_shape (tuple): Shape of the input data (e.g., (28, 28, 1) for MNIST).
-        num_classes (int): Number of output classes (e.g., 10 for MNIST digits).
+        input_shape (tuple): Shape of the input data.
+        num_classes (int): Number of output classes.
 
     It returns a Sequential model
     """
