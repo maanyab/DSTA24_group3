@@ -204,7 +204,7 @@ python3 DSTA24_group3/src/main.py
 - To test, the code was run but always led to “Illegal instruction (code dumped error)”. One thought-out fix was to use pyenv to use the exact python version as the previous author, but even this did not solve it. The next idea was to work with environment.yml files which is based on anaconda, but still led to the same error.
 -  Simultaneously, Docker desktop was installed, although the installation was correct, it seemed to run into the error of not having KVM support for VM which  did not allow visualization. VM’s processor settings were changed according to recommendations online but did not give a positive result. Hours were spent making no progress, finally based on a quick discussion with groupmate, it was decided that the Linux VM might be incompatible and to use Windows machine, this solved the issue.
 
-# Dockerization:
+#### Dockerization:
 -  Docker was first installed on the Windows machine. A new environment was created using the and the necessary dependencies were installed based on the requirements.txt file on the new machine. A .dockerignore file was created to exclude unnecessary files like __pycache__, .venv, and .git from the Docker build context.
   
 -  Then the existing script of saving_FittedModel.py was modified to ensure that the trained model is saved and loaded from the Docker-compatible directory ```/app/model```. The file ```main.py```  was updated to integrate Docker-compatible paths.
