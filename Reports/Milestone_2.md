@@ -206,18 +206,24 @@ python3 DSTA24_group3/src/main.py
 
 # Dockerization:
 -  Docker was first installed on the Windows machine. A new environment was created using the and the necessary dependencies were installed based on the requirements.txt file on the new machine. A .dockerignore file was created to exclude unnecessary files like __pycache__, .venv, and .git from the Docker build context.
-- 
+  
 -  Then the existing script of saving_FittedModel.py was modified to ensure that the trained model is saved and loaded from the Docker-compatible directory ```/app/model```. The file ```main.py```  was updated to integrate Docker-compatible paths.
 
 -  For the Dockerfile, the latest official TensorFlow Docker image was used as the base image:
-```tensorflow/tensorflow:latest”.```
+```
+tensorflow/tensorflow:latest”.
+```
 -  The working directory was set to /app and instructed to copy source files into the container. To save the trained model outside the container, a volume was used ```/app/model```. Finally the default command was to run ```main.py```.
   
 -  The Docker image was built using the following command:
-```docker build -t neuralnet_dockerized .```
+```
+docker build -t neuralnet_dockerized .
+```
 
 - Then the container was run while mapping the host directory for model persistence:
-```docker run -it --rm -v "$(pwd)/model:/app/model" neuralnet_dockerized```
+```
+docker run -it --rm -v "$(pwd)/model:/app/model" neuralnet_dockerized
+```
 
 
 
