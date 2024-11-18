@@ -1,4 +1,4 @@
-# Official TensorFlow image 
+# Official TensorFlow image latest 
 FROM tensorflow/tensorflow:latest
 
 # Working directory inside container
