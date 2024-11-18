@@ -36,12 +36,21 @@ As the file would be too large for Git Repository before commiting it was added 
 
 ## Task 4 
 
+Our aim was to put particular definitions in separate files so that they can be used for various other programs as well. The manner in which we broke our code down will also make it easier to collaborate among our team members as in the future we can work on particular modules independently. We modulised our code keeping in mind whether or not two functions are usually used together, if so then they go in the same file. For instance, if we are loading the data, we would have to do some preprocessing. There both functionality are included in the same file. Lastly, the intent was to structure the code in the way that it has a number of modular functions, therefore instead of waiting for the whole code to run, we can test each funtion individually to ensure the code works smoothly (unit testing).
+
+The table below shows code breakdown into modules -
+
+| **File/Module Name**    |**Functionality** |
+|------------------|------------------|
+|data_handling.py               | This Module loads and preprocesses the data. If same data is to be used for different models this ensures consistency.|  
+|neuralnet_architecture.py      | This module handles the building of neural network model. Putting it in a separate function ensures that we can make changes to model without affecting the training logic.|
+|train_eval.py                  | contains the function for training and evaluating the trained model.
+|saving_FittedModel.py          | saves the fitted model with .keras extensiona and loads the fitted model
+|predicting.py                  | Module to makes predictions using the saved model
+|main.py                        | Orchestrates the overall workflow by importing functions from the above modules. Serves as the single entry point to execute the pipeline (python main.py).
 
 
-
-
-
-
+**Problems**
 
 ## Appendix 
 
