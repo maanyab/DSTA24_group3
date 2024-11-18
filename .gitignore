@@ -3,4 +3,10 @@ __pycache__/
 *.pyo
 *.pyd
 *.npy
-virenv/
+
+# virtual environment directories
+venv/
+
+# Model files(saved models)
+*.keras
+*.h5
