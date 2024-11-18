@@ -199,6 +199,27 @@ conda activate DSTA1_env
 #Run the code
 python3 DSTA24_group3/src/main.py
 ```
+## Task 6
+- To perform task 6, a new branch called “Task6” was created with “Maanya_milestone2” branch as base, since it contained the necessary code modularization. The environment was recreated using the requirement.txt file.
+- To test, the code was run but always led to “Illegal instruction (code dumped error)”. One thought-out fix was to use pyenv to use the exact python version as the previous author, but even this did not solve it. The next idea was to work with environment.yml files which is based on anaconda, but still led to the same error.
+-  Simultaneously, Docker desktop was installed, although the installation was correct, it seemed to run into the error of not having KVM support for VM which  did not allow visualization. VM’s processor settings were changed according to recommendations online but did not give a positive result. Hours were spent making no progress, finally based on a quick discussion with groupmate, it was decided that the Linux VM might be incompatible and to use Windows machine, this solved the issue.
+
+# Dockerization:
+-  Docker was first installed on the Windows machine. A new environment was created using the and the necessary dependencies were installed based on the requirements.txt file on the new machine. A .dockerignore file was created to exclude unnecessary files like __pycache__, .venv, and .git from the Docker build context.
+- 
+-  Then the existing script of saving_FittedModel.py was modified to ensure that the trained model is saved and loaded from the Docker-compatible directory ```/app/model```. The file ```main.py```  was updated to integrate Docker-compatible paths.
+
+-  For the Dockerfile, the latest official TensorFlow Docker image was used as the base image:
+```tensorflow/tensorflow:latest”.```
+-  The working directory was set to /app and instructed to copy source files into the container. To save the trained model outside the container, a volume was used ```/app/model```. Finally the default command was to run ```main.py```.
+  
+-  The Docker image was built using the following command:
+```docker build -t neuralnet_dockerized .```
+
+- Then the container was run while mapping the host directory for model persistence:
+```docker run -it --rm -v "$(pwd)/model:/app/model" neuralnet_dockerized```
+
+
 
 ## Appendix 
 
