@@ -28,5 +28,3 @@ def neuralnet_model(input_shape, num_classes):
         ]
     )
     return model
-
-

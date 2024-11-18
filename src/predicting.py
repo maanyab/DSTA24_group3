@@ -43,4 +43,3 @@ def compare_predictions(model1, model2, x_test):
     except AssertionError:
         print("Predictions from the two models differ.")
         return False
-        

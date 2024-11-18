@@ -28,10 +28,11 @@ def main():
     evaluate_model(model, x_test, y_test)
     
     # Save the model 
-    save_fittedmodel(model)
+    save_fittedmodel(model, filename="/app/model/fitted_model.keras")
+
     
     # Load the fitted model 
-    loaded_model = load_fittedmodel("fitted_model.keras")
+    loaded_model = load_fittedmodel(filename="/app/model/fitted_model.keras")
     
     # Make predictions 
     predictions = make_prediction(loaded_model, x_test)
