@@ -22,7 +22,6 @@ def make_prediction(model, x_test):
 
 
 
-
 def compare_predictions(model1, model2, x_test):
     """
     Compares predictions made by the saved models and original on the same test data.

@@ -36,7 +36,7 @@ As the file would be too large for Git Repository before commiting it was added 
 
 ## Task 4 
 
-Our aim was to put particular definitions in separate files so that they can be used for various other programs as well. The manner in which we broke our code down will also make it easier to collaborate among our team members as in the future we can work on particular modules independently. We modulised our code keeping in mind whether or not two functions are usually used together, if so then they go in the same file. For instance, if we are loading the data, we would have to do some preprocessing. There both functionality are included in the same file. Lastly, the intent was to structure the code in the way that it has a number of modular functions, therefore instead of waiting for the whole code to run, we can test each funtion individually to ensure the code works smoothly (unit testing).
+Our aim was to put particular definitions in separate files so that the functionalities can be used for various other programs as well. The manner in which we broke our code down will also make it easier to collaborate among our team members in the future as we can work on particular modules independently. We modulised our code keeping in mind whether or not two functions are usually used together, if so then they go in the same file. For instance, if we are loading the data, we would have to do some preprocessing. Therefore, both functionalities are included in the same file. Lastly, the intent was to structure the code in the way that it has a number of modular functions so that we can test each function individually to ensure the code works smoothly (unit testing), instead of waiting for the whole code to run.
 
 The table below shows code breakdown into modules -
 
@@ -47,10 +47,11 @@ The table below shows code breakdown into modules -
 |train_eval.py                  | contains the function for training and evaluating the trained model.
 |saving_FittedModel.py          | saves the fitted model with .keras extensiona and loads the fitted model
 |predicting.py                  | Module to makes predictions using the saved model
-|main.py                        | Orchestrates the overall workflow by importing functions from the above modules. Serves as the single entry point to execute the pipeline (python main.py).
+|main.py                        | Combines the overall workflow by importing functions from the above modules. Serves as the single entry point to execute the pipeline (python3 main.py).
 
 
 **Problems**
+After I made separate python files for each module, I received a Pylance error likely because the Python interpreter selected in VS code was one where the dependencies were not installed. Hence, I opened the command palette in VSCode and selected the correct virtual environment. Thereafter, the modularised code ran smoothly.
 
 ## Appendix 
 

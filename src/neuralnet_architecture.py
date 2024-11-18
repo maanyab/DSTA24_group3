@@ -27,9 +27,6 @@ def neuralnet_model(input_shape, num_classes):
             layers.Dense(num_classes, activation="softmax"),
         ]
     )
-
-    model.summary()
-    
     return model
 
 
