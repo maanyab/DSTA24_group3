@@ -224,6 +224,7 @@ docker build -t neuralnet_dockerized .
 ```
 docker run -it --rm -v "$(pwd)/model:/app/model" neuralnet_dockerized
 ```
+The ```-v "$(pwd)/model:/app/model" ``` ensures that .h5 file is accessible even outside the container. And the ```--rm ``` was used to automatically remove the container after it stops. 
 
 
 
