@@ -12,7 +12,8 @@ from train_eval import train_model, evaluate_model
 from saving_FittedModel import save_fittedmodel, load_fittedmodel
 
 #add compare_predictions if the user would like to import the compare models too
-from predicting import make_prediction                       
+from predicting import make_prediction
+                      
 
 def main():
     # Load and preprocess data
@@ -27,10 +28,12 @@ def main():
     # Evaluate the model
     evaluate_model(model, x_test, y_test)
     
-    # Save the model 
+    # Save the fitted model locally 
     save_fittedmodel(model, filename="/app/model/fitted_model.keras")
 
-    
+    # Uploads the trained model
+    #wandb.save()
+
     # Load the fitted model 
     loaded_model = load_fittedmodel(filename="/app/model/fitted_model.keras")
     

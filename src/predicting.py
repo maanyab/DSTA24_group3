@@ -3,12 +3,12 @@ Title: Making predictions from the fitted model
 Description: Making predictions using the fitted model and comparing it with predictions from original model
 """
 
-
+import wandb
 import numpy as np
 
 def make_prediction(model, x_test):
     """
-    Makes predictions using the fitted model on the test data.
+    Makes predictions using the fitted model on the test data and saves it to wandb as a file
 
     Args:
         model: The trained model.
@@ -16,8 +16,15 @@ def make_prediction(model, x_test):
 
     Returns:
         The predictions made by the model.
+        Text file in which the predictions made by the model are saved
     """
     predictions = model.predict(x_test)
+    # save predictions in a file before uploading 
+    np.savetxt("/app/predictions.txt", predictions)
+
+    #uploading predictions to wandb
+    wandb.save("/app/predictions.txt")
+
     return predictions
 
 
@@ -43,3 +50,8 @@ def compare_predictions(model1, model2, x_test):
     except AssertionError:
         print("Predictions from the two models differ.")
         return False
+    
+
+    
+
+
