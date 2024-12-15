@@ -46,3 +46,4 @@ debug/
 .env
 .gitsecret/keys/random_seed
 !*.secret
+public_key.asc

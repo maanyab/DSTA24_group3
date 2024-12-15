@@ -29,10 +29,3 @@ VOLUME /app/model
 # Default to run main script
 ENTRYPOINT ["/app/Entrypoint.sh"]
 CMD ["python", "/app/src/main.py"]
-
-
-
-
-
-
-
