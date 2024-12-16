@@ -1,6 +1,6 @@
 
 # Official TensorFlow image latest 
-FROM tensorflow/tensorflow:2.10.0-py3
+FROM tensorflow/tensorflow:latest
 
 # Working directory inside container
 WORKDIR /app

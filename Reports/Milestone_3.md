@@ -123,37 +123,57 @@ The compose file was set to define two services the PostgreSQL database and Pyth
 dependent on the former, we had to include conditions so that it doesn't run before the database. 
 There are three types of conditions -
 **service_started:**
-**service_healthy:**
-**service_completed_successfully:**
+**service_healthy:** This runs a service on condition that its dependency is healthy. Whether or not the dependency is healthy is indicated by a healthcheck. This is done before starting a dependent service.
+**service_completed_successfully:** This condition specifies that a dependency is expected to run to successful completion before starting a dependent service.
+
+For our project we used the service_healthy condition. Therefore, compose waited for healthchecks to pass on dependencies marked with service_healthy. The service db is expected to be "healthy" before web is created.
+
+```
+web:
+    depends_on:
+      db:
+        condition: service_healthy
+        restart: true
+db:
+    healthcheck: 
+      test: ["CMD-SHELL", "pg_isready -U user -d milestone_3"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
+```
 
 
+**Entity-Relationship Diagram**
+
+Input data table has one to many relationship with predictions as one input value can have many predictions.
+
+```
+erDiagram
+    input_data ||--o{ predictions : based on
+    input_data {
+        int id(PK)
+        Bytea image
+        int label
+    }
+    }
+       predictions {
+        int id(PK)
+        int prediction
+        int input_id(FK)
+    }
+```
 
 
-Since I was running into memory problem, I tried to build docker container using a smaller sized base image.
-Instead of using the latest version of the base image, I used 2.10. Although it is smaller (CPU-only version), still stable and not too heavy to run on my machine.
+**Issues** 
+
+- Since I was running into memory problem, I tried to build docker container using a smaller sized base image. Instead of using the latest version of the base image, I used 2.10. Although it is smaller (CPU-only version), still stable and not too heavy to run on my machine.
 
 ```
 FROM tensorflow/tensorflow:2.10.0-py3
 ```
+While using this I ran into an error - failed to resolve source metadata for docker. I tried to pull this specific image manually, however, it said it didn't exist on dockerhub. Then I switched back to :latest
 
-Using service_healthy
-when restart is set to true Compose restarts this service after it updates the dependency service.
+- The container was taking too long to build, there was no progress and no error messages. The issue was that I had named the file compose.yml, however, docker by default looks for docker-compose.yml. Thereafter, renamed the file to docker-compose.yml and built the container again. I was also running into memory issues, I tried to increase the resource from 64GB to 100GB but it wasn't letting me.
 
-condition: Sets the condition under which dependency is considered satisfied
-
-service_started: An equivalent of the short syntax described above
-service_healthy: Specifies that a dependency is expected to be "healthy" (as indicated by healthcheck) before starting a dependent service.
-service_completed_successfully: Specifies that a dependency is expected to run to successful completion before starting a dependent service.
-
-Compose waits for healthchecks to pass on dependencies marked with service_healthy. In the following example, db is expected to be "healthy" before web is created.
-
-Avoided using fixed container names to avoid error incase of scaling in the future.
-
-
-+---------------+            +------------------+
-|   input_data  |            |   predictions    |
-+---------------+            +------------------+
-| id (PK)       | <----------| id (PK)          |
-| image (BYTEA) |            | prediction (INT) |
-+---------------+            | input_id (FK)    |
-                             +------------------+
+- I was unable to run any docker command on the terminal, the connection  seemed to be fine and docker desktop was running as well. I tried to restart docker desktop but the application wouldn't open. It was not reacting to any command I typed in terminal. Then I uninstalled and reinstalled it, afterthat it seemed to work fine.
