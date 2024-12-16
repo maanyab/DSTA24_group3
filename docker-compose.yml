@@ -2,15 +2,14 @@
 
 services:
   web:
-    build: ./app
+    build: .
     depends_on:
       db:
         condition: service_healthy
         restart: true
     volumes:
-      - ./app:/usr/src/app
-      - model_volume:/usr/src/app/model
-      
+      - ./src:/usr/src/app
+      - ./model:/app/model
   db:
     image: postgres:latest
     volumes:

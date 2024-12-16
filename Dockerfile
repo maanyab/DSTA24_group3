@@ -1,5 +1,6 @@
+
 # Official TensorFlow image latest 
-FROM tensorflow/tensorflow:latest
+FROM tensorflow/tensorflow:2.10.0-py3
 
 # Working directory inside container
 WORKDIR /app
@@ -7,12 +8,7 @@ WORKDIR /app
 # Copy project files into container
 COPY requirements.txt /app
 COPY ./src /app/src
-
-# Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Volume to store trained model outside container
-VOLUME /app/model
-
-# Default to run main script
-CMD ["python", "/app/src/main.py"]
+# Set entry-point
+CMD ["python", "src/db_prediction.py"]
