@@ -18,6 +18,9 @@ venv/
 *.keras   #TensorFlow/keras files 
 *.h5      #TensorFlow/keras files
 .env      #file with wandb API key
+.ipynb_checkpoints/
+
+
 
 # System files
 .DS_Store  # for MacOS
@@ -49,7 +52,6 @@ wandb_debug.log
 *.wav
 
 # Ignore secured files
-
 .env
 .gitsecret/keys/random_seed
 !*.secret
