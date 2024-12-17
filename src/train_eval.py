@@ -22,10 +22,19 @@ def train_model(model, x_train, y_train, x_test, y_test, epochs=15):
     Returns:
         a trained model
     """
+
+    wandb.config.update({
+        "epochs": epochs,
+        "batch_size": 128,
+        "loss_function":"categorical_crossentropy",
+        "optimizer": "adam",
+        "architecture": [layer.__class__.__name__ for layer in model.layers]
+    })
+
     # Compile the model
     model.compile(
         loss="categorical_crossentropy",
-        optimizer="Nadam",
+        optimizer="adam",
         metrics=["accuracy"]
     )
 

@@ -20,7 +20,7 @@ def neuralnet_model(input_shape, num_classes):
             layers.Input(shape=input_shape),
             layers.Conv2D(32, kernel_size=(3, 3), activation="relu"),
             layers.MaxPooling2D(pool_size=(2, 2)),
-            layers.Conv2D(64, kernel_size=(5, 5), activation="tanh"),
+            layers.Conv2D(64, kernel_size=(5, 5), activation="relu"),
             layers.MaxPooling2D(pool_size=(2, 2)),
             layers.Flatten(),
             layers.Dropout(0.5),

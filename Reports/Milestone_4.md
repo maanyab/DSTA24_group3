@@ -71,3 +71,6 @@ ENTRYPOINT ["/bin/bash","/app/Entrypoint.sh"]
 
 - Increased epoc and batchsize 
   https://wandb.ai/maanya-bagga-university-of-luzern/model_evaluation/runs/uairk7k2
+
+- Run with hyperaparmeters logged
+  https://wandb.ai/maanya-bagga-university-of-luzern/model_evaluation/runs/zwhkhtj8

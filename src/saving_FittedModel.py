@@ -5,7 +5,7 @@ Description: Functions to save and load the fitted Neural Network model
 
 import wandb
 
-def save_fittedmodel(model, path="./model/saved_model.keras"):
+def save_fittedmodel(model, path="model/saved_model.keras"):
     """
     Saves the trained model as specified file name locally as well as uploaded to wandb.
 
