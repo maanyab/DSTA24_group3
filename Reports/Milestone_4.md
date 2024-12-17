@@ -74,3 +74,15 @@ ENTRYPOINT ["/bin/bash","/app/Entrypoint.sh"]
 
 - Run with hyperaparmeters logged
   https://wandb.ai/maanya-bagga-university-of-luzern/model_evaluation/runs/zwhkhtj8
+
+
+## Task 3 
+Report available on src/data_analysis.ipynb
+
+
+## Appendix 
+
+  | **Package Name** | **Version** | **SHA256 Hash Digest** |
+|------------------|-------------|------------------------|
+|jupyterlab          |       4.3.3 | 32a8fd30677e734ffcc3916a4758b9dab21b02015b668c60eb36f84357b7d4b1                   |
+|pandas        |2.2.3        | 59ef3764d0fe818125a5097d2ae867ca3fa64df032331b7e0917cf5d7bf66b13
