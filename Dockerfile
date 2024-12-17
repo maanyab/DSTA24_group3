@@ -8,8 +8,6 @@ WORKDIR /app
 # Copy project files into container
 COPY requirements.txt /app
 COPY ./src /app/src
-
-# Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Setting Environment variable for W&B API key using entrypoint 
