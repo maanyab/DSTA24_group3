@@ -17,6 +17,10 @@ venv/
 *.sqlite3 # SQL files
 *.keras   #TensorFlow/keras files 
 *.h5      #TensorFlow/keras files
+.env      #file with wandb API key
+.ipynb_checkpoints/
+
+
 
 # System files
 .DS_Store  # for MacOS
@@ -26,6 +30,12 @@ Thumbs.db  # for Windows
 *.log
 logs/
 debug/
+
+
+# Ignore WandB files and directories
+wandb/
+wandb_debug.log
+
 
 # Media files
 *.jpg
@@ -40,5 +50,12 @@ debug/
 *.mkv
 *.mp3
 *.wav
+
+# Ignore secured files
+.env
+.gitsecret/keys/random_seed
+!*.secret
+public_key.asc
+
 
 

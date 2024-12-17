@@ -6,6 +6,7 @@ Description: Functions to load and Preprocess MNIST Datasets
 
 import numpy as np
 import keras
+import wandb
 
 
 def prepare_data(num_classes=10):
@@ -32,5 +33,8 @@ def prepare_data(num_classes=10):
     # Convert class vectors to binary class matrices (one-hot encoding)
     y_train = keras.utils.to_categorical(y_train, num_classes)
     y_test = keras.utils.to_categorical(y_test, num_classes)
+
+    #logging a few sample images to W&B
+    wandb.log({"sample_images": [wandb.Image(x_train[i], caption=f"Label: {y_train[i]}") for i in range(5)]})
     
     return x_train, y_train, x_test, y_test
