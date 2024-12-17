@@ -28,6 +28,12 @@ Thumbs.db  # for Windows
 logs/
 debug/
 
+
+# Ignore WandB files and directories
+wandb/
+wandb_debug.log
+
+
 # Media files
 *.jpg
 *.jpeg
@@ -42,8 +48,12 @@ debug/
 *.mp3
 *.wav
 
+# Ignore secured files
 
 .env
 .gitsecret/keys/random_seed
 !*.secret
 public_key.asc
+
+
+

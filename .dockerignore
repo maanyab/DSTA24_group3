@@ -6,3 +6,7 @@ __pycache__/
 .git
 *.log
 .gitignore
+wandb
+*.acs
+.gitsecret/
+.env
