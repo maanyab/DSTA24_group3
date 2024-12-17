@@ -8,11 +8,8 @@ Description: A simple convnet that achieves ~99% test accuracy on MNIST.
 """
 from data_handling import prepare_data
 from neuralnet_architecture import neuralnet_model
-from train_eval import train_model, evaluate_model
-from saving_FittedModel import save_fittedmodel, load_fittedmodel
-
-#add compare_predictions if the user would like to import the compare models too
-from predicting import make_prediction                       
+from train_eval import train_model
+from saving_FittedModel import save_fittedmodel
 
 def main():
     # Load and preprocess data
@@ -23,20 +20,9 @@ def main():
     
     # Train the model
     model = train_model(model, x_train, y_train)
-
-    # Evaluate the model
-    evaluate_model(model, x_test, y_test)
     
     # Save the model 
-    save_fittedmodel(model, filename="/app/model/fitted_model.keras")
-
-    
-    # Load the fitted model 
-    loaded_model = load_fittedmodel(filename="/app/model/fitted_model.keras")
-    
-    # Make predictions 
-    predictions = make_prediction(loaded_model, x_test)
-    print("Fitted Model Predictions:", predictions[:5])
+    save_fittedmodel(model, filename="/app/model/saved_model.keras")
 
 if __name__ == "__main__":
     main()
