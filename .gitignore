@@ -56,4 +56,6 @@ wandb_debug.log
 public_key.asc
 
 
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
 
