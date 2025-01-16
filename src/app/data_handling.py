@@ -13,14 +13,9 @@ def prepare_data(num_classes=10):
 	x_train=np.expand_dims(x_train, -1)
 	x_test=np.expand_dims(x-test, -1)
 
-	#Print dataset information
-	print("x_train shape:", x_train.shape)
-	print(x_train.shape[0], "train samples")
-	print(x_test.shape[0], "test samples")
-
 	# Convert class vectors to binary class matrices(one-hot encoding)
 	y_train=keras.utils.to_categorical(y_train, num_classes)
-	y_test =keras.utils.to_categorical(y_test, num_classes)
+	y_test=keras.utils.to_categorical(y_test, num_classes)
 
 `	return x_train, y_train, x_test, y_test
 

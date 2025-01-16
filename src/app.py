@@ -1,8 +1,6 @@
 from app import create_app
-from main import main
 
-# Run main.py when initialising the flask app
-main()
+# initialising the flask app
 
 app = create_app()
 

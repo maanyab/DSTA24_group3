@@ -2,7 +2,7 @@ import tensorflow as tf
 
 def load_model():
 	# path to the model inside the Docker Container
-	model_path = '/app/model/mnist_model.keras'
+	model_path = '/src/app/model/mnist_model.keras'
 	model = tf.keras.models.load_model(model_path)
 	return model
 

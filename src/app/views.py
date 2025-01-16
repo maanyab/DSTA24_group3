@@ -33,10 +33,10 @@ def predict():
 		predictions = prediction(model, image_array)
 
 		#Save preditions to the Database
-		save_image(prediction,image)
+		save_image(predictions,image)
 
 		#Return the prediction to the user
-		return jsonify({'prediction': int(prediction)})
+		return jsonify({'prediction': int(predictions)})
 
 	except Exception as e:
-	 return jsonify ({'error': str(e)}), 500
+		return jsonify ({'error': str(e)}), 500
