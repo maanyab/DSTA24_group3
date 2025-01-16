@@ -16,7 +16,7 @@ model =  load_model()
 def predict():
 	try:
 #Get the JSON payload from the POST request
-		data =  request.get_jason()
+		data =  request.get_json()
 
 		if 'image' not in data:
 		    return jsonify({'error': 'No image provided in the request'}), 400
@@ -27,7 +27,7 @@ def predict():
 		image_array = np.array(image)
 
 		# Reshaping the image for neural network
-		imgae_array = image_array.reshape(1,28,28,1).astype('float32')/255.0
+		image_array = image_array.reshape(1,28,28,1).astype('float32')/255.0
 
 		#Get Predictions
 		predictions = prediction(model, image_array)

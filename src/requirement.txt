@@ -27,7 +27,6 @@ opt-einsum==3.3.0
 packaging==24.0
 Pillow==9.5.0
 pip==24.0
-pkg_resources==0.0.0
 protobuf==3.19.6
 psycopg2-binary==2.9.9
 pyasn1==0.5.1
@@ -39,7 +38,7 @@ setuptools==68.0.0
 six==1.17.0
 tensorboard==2.11.2
 tensorboard-data-server==0.6.1
-tensorboard-plugin-wi==1.8.1
+tensorboard-plugin-wit==1.8.1
 tensorflow==2.11.0
 tensorflow-estimator==2.11.0
 tensorflow-io-gcs-filesystem==0.34.0

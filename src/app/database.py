@@ -1,6 +1,5 @@
 import psycopg2
 import os
-from dotenv import load_dotenv
 from io import BytesIO
 from PIL import Image
 

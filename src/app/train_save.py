@@ -6,4 +6,4 @@ def train_model(model, x_train, y_train, batch_size, epochs, validation_split=0.
 	return model
 
 def save_model(model):
-	model.save('/app/mode/mnist_model.keras')
+	model.save('/app/model/mnist_model.keras')
