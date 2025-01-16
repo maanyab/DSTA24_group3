@@ -1,20 +1,16 @@
 import psycopg2
-from psycopg2 import SQL
 import os
 from dotenv import load_dotenv
 from io import BytesIO
 from PIL import Image
 
-# load environment variables from .env files
-load_dotenv()
 
 # Connect to postgre
 DEFAULT_CONFIG={
 	"host": "localhost",
 	"port": "5432",
 	"database": "postgres",
-	"user": "postgres",
-	"password": "postgres"
+	"user": "postgres"
 }
 
 
@@ -23,20 +19,18 @@ DEFAULT_CONFIG={
 # Database configuration from environment variables 
 DB_CONFIG={
 	"host": os.getenv("DB_HOST", "localhost"),
-	"post": os.getenv("DB_PORT", "5432"),
+	"port": os.getenv("DB_PORT", "5432"),
 	"database": os.getenv("DB_NAME", "mnist_db"),
-	"user": os.getenv("DB_USER", "postgres"),
-	"password": os.getenv("DB_PASSWORD", "postgres")
+	"user": os.getenv("DB_USER", "postgres")
 }
 
 def create_database():
 	try:
 		conn=psycopg2.connect(
-			host=DEFAULT_CONFIG["host"]
-			port=DEFAULT_CONFIG["port"]
-			database=DEFAULT_CONFIG["database"]
-			user=DEFAULT_CONFIG["user"]
-			password=DEFAULT_CONFIG["password"]
+			host=DEFAULT_CONFIG["host"],
+			port=DEFAULT_CONFIG["port"],
+			database=DEFAULT_CONFIG["database"],
+			user=DEFAULT_CONFIG["user"],
 		)
 		conn.autocommit=True
 		cursor = conn.cursor()
@@ -50,21 +44,20 @@ def create_database():
 		else:
 			print(f"Database '{mnist_db}' already exists.")
 
-	except Exception as e;
+	except Exception as e:
 		print(f"Error creating database: {e}")
 	finally:
 		cursor.close()
 		conn.close()
 
 # Connection to Postgre
-def connect_db()
+def connect_db():
 	try:
 		conn = psycopg2.connect(
 			host=DB_CONFIG["host"],
 			port=DB_CONFIG["port"],
 			database=DB_CONFIG["database"],
-			user=DB_CONFIG["user"],
-			password=DB_CONFIG["password"]
+			user=DB_CONFIG["user"]
 		)
 		return conn
 	except Exception as e:
@@ -72,7 +65,7 @@ def connect_db()
 		raise
 def init_db():
 	conn=connect_db()
-	cursor =conn.cursor()
+	cursor=conn.cursor()
 	try:
 		cursor.execute("""
 			CREATE TABLE IF NOT EXISTS input_data (
@@ -81,7 +74,7 @@ def init_db():
 				image_data BYTEA NOT NULL
 			);
 		""")
- 		cursor.execute("""
+		cursor.execute("""
 			CREATE TABLE IF NOT EXISTS prediction (
 				id SERIAL PRIMARY KEY,
 				prediction INT NOT NULL,
@@ -113,15 +106,15 @@ def save_image(label, image_array):
 		conn.commit()
 		inserted_id=cursor.fetchone()[0]
 		return inserted_id
-	except Exception as e
-		print(f"Error saving image to database: {e}')
+	except Exception as e:
+		print(f"Error saving image to database: {e}")
 	finally:
 		cursor.close()
 		conn.close()
 
 def fetch_image(image_id):
 	conn=connect_db()
-`	cursor=conn.cursor()
+	cursor=conn.cursor()
 	try:
 		cursor.execute("SELECT label, image_data FROM input_data WHERE id = %s;", (image_id,))
 		record=cursor.fetchone()

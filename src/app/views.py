@@ -5,7 +5,7 @@ import io
 from flask import Blueprint, request, jsonify
 from app.model import load_model, prediction
 from app.database import save_image
-from PIL import image
+from PIL import Image
 
 main_bp = Blueprint('main', __name__)
 
