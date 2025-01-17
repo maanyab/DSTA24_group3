@@ -1,5 +1,5 @@
 
-# Milestone 2
+# Milestone 5
 *DSTA24 Fall Term 2024 - Group 3*
 
 __*Authors*__
@@ -10,33 +10,48 @@ __*Authors*__
 
 
 ## Description
-This project implements sequential model on the keras' MNIST dataset to classify images of handwritten digits.
 
+Flask-based Image Classification App
 
-## Prerequisites
+This project is a web-based application that uses a pre-trained neural network to classify images.
 
-Below are the requirements for running the code
-- Python
-- Dependencies including but not limited to Keras, Numpy and Tensorflow. Rest of the dependencies can be found in the requirements.txt file.
+---
 
-## Installation
-You can run the code by cloning the main branch of the repository 
+## Technologies Used
+
+- **Back-end**: Flask, TensorFlow/Keras
+- **Front-end**: HTML, CSS (via Flask templates)
+- **Database**: PostgreSQL
+- **Containerization**: Docker, Docker Compose
+- **Dependencies**: See `requirements.txt`
+
+---
+
+## Setup Instructions
+
+### Prerequisites
+
+- Python 3.10+
+- Docker and Docker Compose 
+- PostgreSQL superuser login
+
+### Clone the Repository
 
 ```bash
-# Clone the repository
-git clone https://github.com/maanyab/DSTA24_group3.git
+git clone <repository-url>
+cd <repository-name>
+```
 
-# Navigate to the project directory where you want to clone the repository
-cd your-repository
+### Running the Code 
 
-#Create and activate the virtual environment
+- Build the container 
 
-python -m venv myvenv  #Make sure the virtual environment is running Python 3.11
-source venv/bin/activate
+```
+docker-compose build
 
-#Install dependencies (if applicable)
-pip install -r requirements.txt  # If running the code using 1st method 
+```
+- Run the container
 
-# Use this command to run the python file
-python src/main.py
+```
+docker-compose up
 ```

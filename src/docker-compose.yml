@@ -2,26 +2,13 @@ version: "3.3"
 
 services:
  web:
-  build: 
-   context: .
-   dockerfile: Dockerfile
-  expose:
-   - "5000"
+  build: .
+  ports:
+   - "5000:5000"
   volumes:
-   - ./src:/src
-  command: >
-   bash -c "python /src/train.py && flask run --host=0.0.0.0 --port=5000"
+   - ./src/app/model:/app/model
   depends_on:
    - db
-
- nginx:
-  build:
-   context: .
-   dockerfile: Dockerfile.nginx
-  ports:
-   - "8080:80"
-  depends_on:
-   - web
 
  db:
   image: postgres:13

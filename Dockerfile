@@ -1,22 +1,20 @@
+FROM python:3.10-slim
 
-# Official TensorFlow image latest 
-FROM tensorflow/tensorflow:latest
+# Set working directory
+WORKDIR /src
 
-# Working directory inside container
-WORKDIR /app
+#Copy files from outside app to container's working directory
+COPY ./src /src
+COPY ./requirement.txt /src/requirement.txt
 
-# Copy project files into container
-COPY requirements.txt /app
-COPY ./src /app/src
-RUN pip install --no-cache-dir -r requirements.txt
+#Install Dependencies
+RUN pip install --no-cache-dir -r /src/requirement.txt
 
-# Setting Environment variable for W&B API key using entrypoint 
-COPY Entrypoint.sh /app/Entrypoint.sh
-RUN chmod +x /app/Entrypoint.sh
+#Expose the port
+EXPOSE 5000
 
-# Volume to store trained model outside container
-VOLUME /app/model
+#Run the application
+CMD ["bash", "-c", "python /src/train.py && gunicorn --workers=3 --bind=0.0.0.0:5000 app:app"]
 
-# Default to run main script
-ENTRYPOINT ["/bin/bash","/app/Entrypoint.sh"]
-CMD ["python", "/app/src/main.py"]
+
+
