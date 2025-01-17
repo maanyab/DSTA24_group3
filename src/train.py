@@ -1,5 +1,5 @@
 import base64
-import keras 
+import keras
 import psycopg2
 from PIL import Image
 import numpy as np
@@ -21,7 +21,7 @@ model = neuralnet_model(input_shape=(28, 28, 1),num_classes=10)
 model = train_model(model, x_train, y_train)
     
 # Save the model 
-save_model(model, filename="src/app/model/mnist_model.keras")
+save_model(model)
 
 #Connect to postgre
 connection = psycopg2.connect(

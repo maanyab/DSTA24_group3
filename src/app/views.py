@@ -1,15 +1,11 @@
 import os
 import numpy as np
-from flask import request, jsonify
-import keras
-from train import save_image, save_prediction, init_db, preprocess_image  
-from app import app
+from flask import request, jsonify, current_app
+from train import save_image, save_prediction, preprocess_image
 
-# Load the pre-trained model
-model = keras.models.load_model("src/app/mnist_model.keras")
+
 
 # Endpoint for making predictions
-@app.route('/predict', methods=['POST'])
 def predict():
     try:
         # Get the image data from the POST request (base64 format)
@@ -35,12 +31,3 @@ def predict():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-# Initialize database tables (before the first request)
-@app.before_first_request
-def init_db_tables():
-    init_db()  
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
-
-	
