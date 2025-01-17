@@ -6,58 +6,94 @@ import psycopg2
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 from app.model import load_model
 
+# Model Path to load the model
+
+MODEL_PATH = os.getenv("MODEL_PATH", "src/app/model/saved_model.keras")
+
+
+def connect_db():
+    """Establish a connection to the PostgreSQL database and create mnist_db database if it doesn't exist"""
+    connection = None
+    cursor = None
+
+    for i in range(5):
+        try:
+            connection= psycopg2.connect(
+                host="db",
+                port=5432,
+                user="postgres",
+                password="",
+                database="postgres",
+            )
+            connection.autocommit = True  
+            cursor = connection.cursor()
+            print(f"Connection established")
+            break
+        except psycopg2.OperationalError as e:
+            print(f"Attempt {i} failed: {e}. Retrying...")
+    
+    
+     # Creating the mnist_db database
+    try:
+        cursor.execute("CREATE DATABASE mnist_db;")
+        print("Database 'mnist_db' created successfully.")
+    except psycopg2.errors.DuplicateDatabase:
+        print("Database already exists.")
+
+# Close the connection with default database 
+    cursor.close()
+    connection.close()
+
 # Load environment variables for database and model paths
 DB_HOST = os.getenv("DB_HOST", "db")
 DB_PORT = os.getenv("DB_PORT", "5432")
 DB_USER = os.getenv("DB_USER", "postgres")
 DB_PASSWORD = os.getenv("DB_PASSWORD", "")
 DB_NAME = os.getenv("DB_NAME", "mnist_db")
-MODEL_PATH = os.getenv("MODEL_PATH", "src/app/model/saved_model.keras")
 
 
-def connect_db():
-    """Establish a connection to the PostgreSQL database."""
-    try:
-        return psycopg2.connect(
-            host=DB_HOST,
-            port=DB_PORT,
-            user=DB_USER,
-            password=DB_PASSWORD,
-            database=DB_NAME,
-        )
-    except psycopg2.Error as e:
-        print(f"Error connecting to the database: {e}")
-        raise
+# Connect to the new database
+def connect_mdb():
+    return psycopg2.connect(
+        host=DB_HOST,
+        port=DB_PORT,
+        user=DB_USER,
+        password=DB_PASSWORD,
+        database=DB_NAME
+    )
 
 
-def init_db():
+
+def init_db(conn):
     """Initialize the database by creating the necessary tables."""
-    conn = connect_db()
-    cursor = conn.cursor()
-    try:
-        cursor.execute("""
-            CREATE TABLE IF NOT EXISTS input_data (
-                id SERIAL PRIMARY KEY,
-                label INT NOT NULL,
-                image_data BYTEA NOT NULL
-            );
-        """)
-        cursor.execute("""
-            CREATE TABLE IF NOT EXISTS predictions (
-                id SERIAL PRIMARY KEY,
-                prediction INT NOT NULL,
-                input_id INT REFERENCES input_data (id)
-            );
-        """)
-        conn.commit()
-        print("Tables initialized successfully.")
-    except Exception as e:
-        print(f"Error initializing database: {e}")
+    with conn.cursor() as cursor:
+        try:
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS input_data (
+                    id SERIAL PRIMARY KEY,
+                    label INT NOT NULL,
+                    image_data BYTEA NOT NULL
+                );
+            """)
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS predictions (
+                    id SERIAL PRIMARY KEY,
+                    prediction INT NOT NULL,
+                    input_id INT REFERENCES input_data (id)
+                );
+            """)
+            conn.commit()
+            print("Tables initialized successfully.")
+        except Exception as e:
+            print(f"Error initializing database: {e}")
         raise
-    finally:
-        cursor.close()
-        conn.close()
+        
+    cursor.close()
+    conn.close()
 
+#Initialize the database
+conn = connect_mdb()
+init_db(conn)
 
 def save_image(label, image_array):
     """Save an image to the database."""
@@ -87,7 +123,7 @@ def save_image(label, image_array):
 
 def fetch_image(image_id):
     """Fetch an image and its label from the database."""
-    conn = connect_db()
+    conn = connectmdb()
     cursor = conn.cursor()
     try:
         cursor.execute("SELECT label, image_data FROM input_data WHERE id = %s;", (image_id,))
@@ -127,7 +163,7 @@ def predict_image(image):
 
 def save_prediction(prediction, input_id):
     """Save the prediction to the database."""
-    conn = connect_db()
+    conn = connect_mdb()
     cursor = conn.cursor()
     try:
         cursor.execute(
@@ -141,6 +177,7 @@ def save_prediction(prediction, input_id):
     finally:
         cursor.close()
         conn.close()
+
 
 
 
