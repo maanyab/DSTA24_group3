@@ -87,7 +87,7 @@ def init_db(conn):
         except Exception as e:
             print(f"Error initializing database: {e}")
         raise
-        
+
     cursor.close()
     conn.close()
 
@@ -97,7 +97,7 @@ init_db(conn)
 
 def save_image(label, image_array):
     """Save an image to the database."""
-    conn = connect_db()
+    conn = connect_mdb()
     cursor = conn.cursor()
     try:
         # Serialize the image to binary format
@@ -123,7 +123,7 @@ def save_image(label, image_array):
 
 def fetch_image(image_id):
     """Fetch an image and its label from the database."""
-    conn = connectmdb()
+    conn = connect_mdb()
     cursor = conn.cursor()
     try:
         cursor.execute("SELECT label, image_data FROM input_data WHERE id = %s;", (image_id,))
