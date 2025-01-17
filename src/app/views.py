@@ -1,44 +1,48 @@
-import base64
+import os
 import numpy as np
-import tensorflow as tf
-import io
-from flask import Blueprint, request, jsonify
-from app.model import load_model, prediction
-from app.database import save_image
-from PIL import Image
+from flask import Flask, request, jsonify
+import keras
+from train import save_image, save_prediction, init_db, preprocess_image  
 
-main_bp = Blueprint('main', __name__)
+# Initialize Flask app
+app = Flask(__name__)
 
-#load pre trained keras model
-model =  load_model()
+# Load the pre-trained model (assuming it's already saved)
+model = keras.models.load_model("src/app/mnist_model.keras")
 
-@main_bp.route('/predict',methods=['POST'])
+# Endpoint for making predictions
+@app.route('/predict', methods=['POST'])
 def predict():
-	try:
-#Get the JSON payload from the POST request
-		data =  request.get_json()
+    try:
+        # Get the image data from the POST request (base64 format)
+        data = request.get_json()
+        if 'image' not in data:
+            return jsonify({'error': 'No image provided'}), 400
 
-		if 'image' not in data:
-			return jsonify({'error': 'No image provided in the request'}), 400
+        # Preprocess the image using the utility function
+        input_data = preprocess_image(data['image'])
 
-		# Decode the base64 image to a numpy array
-		image_data = base64.b64decode(data['image'].split(',')[-1])
-		image = Image.open(io.BytesIO(image_data)).convert('L')
-		image =image.resize((28,28))
-		image_array = np.array(image)
+        # Make a prediction using the model
+        prediction = np.argmax(model.predict(input_data))
 
-		# Reshaping the image for neural network
-		image_array = image_array.reshape(1,28,28,1).astype('float32')/255.0
+        # Optionally save image to database
+        input_id = save_image(label=None, image_array=input_data)
 
-		#Get Predictions
-		predictions = prediction(model, image_array)
-		predicted_label = int(np.argmax(predictions))
+        # Save prediction to the database
+        save_prediction(prediction, input_id)
 
-		#Save preditions to the Database
-		save_image(predictions, image_array)
+        # Return prediction result to the client
+        return jsonify({'prediction': int(prediction)}), 200
 
-		#Return the prediction to the user
-		return jsonify({'prediction': int(predicted_label)})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
-	except Exception as e:
-		return jsonify ({'error': str(e)}), 500
+# Initialize database tables (before the first request)
+@app.before_first_request
+def init_db_tables():
+    init_db()  # Call the imported init_db function from database.py
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
+
+	
