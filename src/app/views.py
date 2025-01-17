@@ -1,13 +1,11 @@
 import os
 import numpy as np
-from flask import Flask, request, jsonify
+from flask import request, jsonify
 import keras
 from train import save_image, save_prediction, init_db, preprocess_image  
+from app import app
 
-# Initialize Flask app
-app = Flask(__name__)
-
-# Load the pre-trained model (assuming it's already saved)
+# Load the pre-trained model
 model = keras.models.load_model("src/app/mnist_model.keras")
 
 # Endpoint for making predictions
@@ -25,7 +23,7 @@ def predict():
         # Make a prediction using the model
         prediction = np.argmax(model.predict(input_data))
 
-        # Optionally save image to database
+        # Save image to database
         input_id = save_image(label=None, image_array=input_data)
 
         # Save prediction to the database
@@ -40,7 +38,7 @@ def predict():
 # Initialize database tables (before the first request)
 @app.before_first_request
 def init_db_tables():
-    init_db()  # Call the imported init_db function from database.py
+    init_db()  
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
