@@ -6,7 +6,7 @@ from PIL import Image
 
 # Connect to postgre
 DEFAULT_CONFIG={
-	"host": "localhost",
+	"host": "db",
 	"port": "5432",
 	"database": "postgres",
 	"user": "postgres"
@@ -17,7 +17,7 @@ DEFAULT_CONFIG={
 
 # Database configuration from environment variables 
 DB_CONFIG={
-	"host": os.getenv("DB_HOST", "localhost"),
+	"host": os.getenv("DB_HOST", "db"),
 	"port": os.getenv("DB_PORT", "5432"),
 	"database": os.getenv("DB_NAME", "mnist_db"),
 	"user": os.getenv("DB_USER", "postgres")
@@ -95,7 +95,7 @@ def save_image(label, image_array):
 	try:
 		#  serialise the image to binary format
 		image_bytes=BytesIO()
-		Image.fromarray(sample_image).save(image_bytes, format="PNG")
+		Image.fromarray(image_array).save(image_bytes, format="PNG")
 		image_binary = image_bytes.getvalue()
 
 		cursor.execute(

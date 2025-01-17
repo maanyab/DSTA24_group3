@@ -1,9 +1,10 @@
 import numpy as np
-import keras
+from tensorflow.keras import datasets
+from tensorflow import keras
 
 def prepare_data(num_classes=10):
 	#load the data and split between train and test sets
-	(x_train, y_train), (x_test,y_test) = keras.datasets.mnist.load_data()
+	(x_train, y_train), (x_test,y_test) = datasets.mnist.load_data()
 
 	#Scale image to the [0,1] range
 	x_train=x_train.astype("float32") / 255
