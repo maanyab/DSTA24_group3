@@ -1,6 +1,6 @@
 from flask import Flask
 import keras
-from train import init_db
+from app.views import predict
 
 def create_app():
 
@@ -9,11 +9,7 @@ def create_app():
 	#Load the model once and store in app context
 	app.model = keras.models.load_model('src/app/model/mnist_model.keras')
 
-	# Initialise the database
-	with app.app_context():
-		init_db()
-
-	from app.views import predict
+	# Register Routes
 	app.add_url_rule('/predict', view_func=predict, methods=['POST'])
 
 	return app
